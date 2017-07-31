@@ -47,13 +47,18 @@ PRODUCT_COPY_FILES += \
 PRODUCT_COPY_FILES += \
     $(SONY_ROOT)/system/etc/msm_irqbalance.conf:system/etc/msm_irqbalance.conf
 
+# RQBalance-PowerHAL configuration
+PRODUCT_COPY_FILES += \
+    $(SONY_ROOT)/system/etc/rqbalance_config.xml:system/etc/rqbalance_config.xml
+
 # Device Specific Hardware
 PRODUCT_COPY_FILES += \
     frameworks/native/data/etc/android.hardware.opengles.aep.xml:system/etc/permissions/android.hardware.opengles.aep.xml \
     frameworks/native/data/etc/android.hardware.vulkan.level-0.xml:system/etc/permissions/android.hardware.vulkan.level.xml \
     frameworks/native/data/etc/android.hardware.vulkan.version-1_0_3.xml:system/etc/permissions/android.hardware.vulkan.version.xml \
     frameworks/native/data/etc/android.hardware.sensor.barometer.xml:system/etc/permissions/android.hardware.sensor.barometer.xml \
-    frameworks/native/data/etc/com.android.nfc_extras.xml:system/etc/permissions/com.android.nfc_extras.xml
+    frameworks/native/data/etc/com.android.nfc_extras.xml:system/etc/permissions/com.android.nfc_extras.xml \
+    frameworks/native/data/etc/com.nxp.mifare.xml:system/etc/permissions/com.nxp.mifare.xml
 
 # Overlay
 DEVICE_PACKAGE_OVERLAYS += \
@@ -142,6 +147,7 @@ PRODUCT_PROPERTY_OVERRIDES += \
     ro.qti.sensors.dpc=false \
     ro.qti.sensors.wu=true
 
-## 8MP Switch for ES
 PRODUCT_PROPERTY_OVERRIDES += \
-    persist.camera.8mp.config=true
+    persist.camera.HAL3.enabled=0 \
+    media.stagefright.less-secure=true \
+    media.stagefright.legacyencoder=true

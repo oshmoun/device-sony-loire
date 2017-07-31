@@ -15,7 +15,9 @@
 # Platform path
 PLATFORM_COMMON_PATH := device/sony/loire-common
 
+PRODUCT_PLATFORM := loire
 TARGET_BOARD_PLATFORM := msm8952
+TARGET_KERNEL_VERSION := 3.10
 
 TARGET_ARCH := arm64
 TARGET_ARCH_VARIANT := armv8-a
@@ -50,10 +52,10 @@ TARGET_KERNEL_HEADER_ARCH := arm64
 TARGET_KERNEL_CROSS_COMPILE_PREFIX := aarch64-linux-android-
 BOARD_KERNEL_IMAGE_NAME := Image.gz-dtb
 
-#Reserve space for data encryption (22225616896-16384)
-BOARD_SYSTEMIMAGE_PARTITION_SIZE := 6197084160
-BOARD_USERDATAIMAGE_PARTITION_SIZE := 22225600512
-BOARD_CACHEIMAGE_PARTITION_SIZE := 268435456
+#Reserve space for data encryption (21742424064-16384)
+BOARD_SYSTEMIMAGE_PARTITION_SIZE := 5513412608
+BOARD_USERDATAIMAGE_PARTITION_SIZE := 21742407680
+BOARD_CACHEIMAGE_PARTITION_SIZE := 260014080
 BOARD_FLASH_BLOCK_SIZE := 131072 # (BOARD_KERNEL_PAGESIZE * 64)
 
 TARGET_RECOVERY_FSTAB = $(PLATFORM_COMMON_PATH)/rootdir/fstab.loire
@@ -66,8 +68,8 @@ BOARD_WPA_SUPPLICANT_PRIVATE_LIB := lib_driver_cmd_bcmdhd
 BOARD_HOSTAPD_DRIVER        := NL80211
 BOARD_HOSTAPD_PRIVATE_LIB   := lib_driver_cmd_bcmdhd
 WIFI_DRIVER_FW_PATH_PARAM   := "/sys/module/bcmdhd/parameters/firmware_path"
-WIFI_DRIVER_FW_PATH_AP      := "/vendor/firmware/fw_bcmdhd_apsta.bin"
-WIFI_DRIVER_FW_PATH_STA     := "/vendor/firmware/fw_bcmdhd.bin"
+WIFI_DRIVER_FW_PATH_AP      := "/etc/firmware/fw_bcmdhd_apsta.bin"
+WIFI_DRIVER_FW_PATH_STA     := "/etc/firmware/fw_bcmdhd.bin"
 
 # BT definitions for Broadcom solution
 BOARD_BLUETOOTH_BDROID_BUILDCFG_INCLUDE_DIR := $(PLATFORM_COMMON_PATH)/bluetooth
@@ -80,15 +82,16 @@ TARGET_PER_MGR_ENABLED := true
 
 # NFC
 NXP_CHIP_TYPE := PN547C2
+NXP_CHIP_FW_TYPE := PN547C2
 
 # FM definitions for Broadcom solution
 BOARD_HAVE_ALTERNATE_FM := true
 BOARD_HAVE_BCM_FM := true
 
-# Props for hotplugging
-TARGET_SYSTEM_PROP += $(PLATFORM_COMMON_PATH)/system.prop
+# Camera
+TARGET_HAS_LEGACY_CAMERA_HAL1 := true
 
 # SELinux
-BOARD_SEPOLICY_DIRS += $(PLATFORM_COMMON_PATH)/sepolicy
+BOARD_SEPOLICY_DIRS += $(PLATFORM_COMMON_PATH)/sepolicy_platform
 
 include device/sony/common/CommonConfigOmni.mk
